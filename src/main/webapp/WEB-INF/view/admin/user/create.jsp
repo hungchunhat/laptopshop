@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
     <title>hungdeptrai</title>
@@ -14,31 +15,35 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h1 class="border-bottom my-3">Create User</h1>
-    <form>
-        <div class="mb-3">
-            <label for="InputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 mx-auto">
+            <h1 class="border-bottom my-3">Create User</h1>
+            <form:form method="post" action="/admin/user/create" modelAttribute="newUser">
+                <div class="mb-3">
+                    <form:label for="Email" class="form-label" path="email">Email address</form:label>
+                    <form:input type="email" class="form-control" id="Email" path="email" aria-describedby="emailHelp"/>
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="Password" class="form-label">Password:</label>
+                    <form:input type="password" class="form-control" path="password" id="Password"/>
+                </div>
+                <div class="mb-3">
+                    <label for="Phone" class="form-label">Phone Number:</label>
+                    <form:input type="email" class="form-control" path="phone" id="Phone"/>
+                </div>
+                <div class="mb-3">
+                    <label for="Name" class="form-label">Full Name:</label>
+                    <form:input type="email" class="form-control" path="fullName" id="Name"/>
+                </div>
+                <div class="mb-3">
+                    <label for="Address" class="form-label">Address:</label>
+                    <form:input type="email" class="form-control" path="address" id="Address"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form:form>
         </div>
-        <div class="mb-3">
-            <label for="InputPassword1" class="form-label">Password:</label>
-            <input type="password" class="form-control" id="InputPassword1">
-        </div>
-        <div class="mb-3">
-            <label for="InputPhone" class="form-label">Phone Number:</label>
-            <input type="email" class="form-control" id="InputPhone">
-        </div>
-        <div class="mb-3">
-            <label for="InputName" class="form-label">Full Name:</label>
-            <input type="email" class="form-control" id="InputName">
-        </div>
-        <div class="mb-3">
-            <label for="InputAddress" class="form-label">Address:</label>
-            <input type="email" class="form-control" id="InputAddress">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
 </div>
 </body>
 </html>
