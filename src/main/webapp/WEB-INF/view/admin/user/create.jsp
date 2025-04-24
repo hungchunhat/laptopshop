@@ -30,15 +30,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="Phone" class="form-label">Phone Number:</label>
-                    <form:input type="email" class="form-control" path="phone" id="Phone"/>
+                    <form:input type="text" class="form-control" path="phone" id="Phone"/>
                 </div>
                 <div class="mb-3">
                     <label for="Name" class="form-label">Full Name:</label>
-                    <form:input type="email" class="form-control" path="fullName" id="Name"/>
+                    <form:input type="text" class="form-control" path="fullName" id="Name"/>
                 </div>
                 <div class="mb-3">
                     <label for="Address" class="form-label">Address:</label>
-                    <form:input type="email" class="form-control" path="address" id="Address"/>
+                    <form:input type="text" class="form-control" path="address" id="Address"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form:form>
