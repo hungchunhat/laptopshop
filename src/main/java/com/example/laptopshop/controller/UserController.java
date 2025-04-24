@@ -44,4 +44,22 @@ public class UserController {
         System.out.println(this.userService.handleSaveUser(user));
         return "redirect:/admin/user";
     }
+    @GetMapping("admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User user = this.userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "admin/user/update";
+    }
+    @PostMapping("/admin/user/update")
+    public String updateUser(@ModelAttribute("user") User user) {
+        User user1 = this.userService.getUserById(user.getId());
+        if(user1 != null) {
+            user1.setAddress(user.getAddress());
+            user1.setPhone(user.getPhone());
+            user1.setFullName(user.getFullName());
+            userService.handleSaveUser(user1);
+        }
+        System.out.println(user1);
+        return "redirect:/admin/user";
+    }
 }

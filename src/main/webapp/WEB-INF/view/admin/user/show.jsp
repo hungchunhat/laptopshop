@@ -24,7 +24,7 @@
         </ul>
     </div>
     <div class="d-flex justify-content-center mt-2">
-        <a href="${pageContext.request.contextPath}/admin/user" class="btn btn-success text-center">Back</a>
+        <a href="/admin/user" class="btn btn-success text-center">Back</a>
     </div>
 </div>
 </body>
