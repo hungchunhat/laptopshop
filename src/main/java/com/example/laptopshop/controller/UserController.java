@@ -4,10 +4,8 @@ import com.example.laptopshop.domain.User;
 import com.example.laptopshop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -26,14 +24,24 @@ public class UserController {
     }
     @RequestMapping(value = "/admin/user")
     public String getAdminPage(Model model) {
-        String test = userService.handleHello();
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "admin/user/index";
+    }
+    @GetMapping("admin/user/create")
+    public String getCreatePage(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
+    @GetMapping("/admin/user/{id}")
+    public String getUserDetailPage(Model model, @PathVariable long id) {
+        User user = this.userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "admin/user/show";
+    }
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createAdminPage(@ModelAttribute("newUser") User user) {
-        System.out.println(user);
         System.out.println(this.userService.handleSaveUser(user));
-        return "hello";
+        return "redirect:/admin/user";
     }
 }

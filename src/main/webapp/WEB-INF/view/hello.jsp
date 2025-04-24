@@ -25,6 +25,6 @@
 <p>
     ${hungdeptrai2}
 </p>
-<button class="btn btn-primary ms-2">hello</button>
+<a class="btn btn-primary ms-2" href="admin/user">hello, let's go to user's list</a>
 </body>
 </html>
