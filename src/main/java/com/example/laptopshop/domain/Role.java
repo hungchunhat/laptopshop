@@ -2,6 +2,8 @@ package com.example.laptopshop.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -10,6 +12,8 @@ public class Role {
     private long id;
     private String name;
     private String description;
+    @OneToMany(mappedBy = "role")
+    private List<User> users;
 
     public long getId() {
         return id;
@@ -33,6 +37,15 @@ public class Role {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    //Careful here --------------------------
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override

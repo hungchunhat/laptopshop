@@ -1,12 +1,8 @@
 package com.example.laptopshop.domain;
-//id: long
-//email: String
-//password: String
-//fullName: String
-//address: String;
-//phone: String
 
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -21,6 +17,10 @@ public class User {
     private String address;
     private String phone;
     private String avatar;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Role role;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     public long getId() {
         return id;
@@ -76,6 +76,23 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    //careful here---------------------------------------------------
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
