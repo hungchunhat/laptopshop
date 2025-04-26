@@ -1,4 +1,4 @@
-package com.example.laptopshop.controller;
+package com.example.laptopshop.controller.admin;
 
 import com.example.laptopshop.domain.User;
 import com.example.laptopshop.service.UserService;

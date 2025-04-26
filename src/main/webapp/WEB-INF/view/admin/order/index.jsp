@@ -1,14 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content="Hỏi Dân IT - Dự án laptopshop"/>
-    <meta name="author" content="Hỏi Dân IT"/>
-    <title>Dashboard - Hỏi Dân IT</title>
+    <meta name="description" content="hungthuhai - Dự án laptopshop"/>
+    <meta name="author" content="hungthuhai"/>
+    <title>Dashboard - hungthuhai</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
     <link href="/resources/css/styles.css" rel="stylesheet"/>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -21,20 +20,11 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Manager User</h1>
+                <h1 class="mt-4">Order</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active">User</li>
+                    <li class="breadcrumb-item active">Order</li>
                 </ol>
-            </div>
-            <div class="container mt-5">
-                <h1>Delete user with id = ${id}</h1>
-                <div class="alert alert-danger">ARE YOU SURE?</div>
-                <form:form action="/admin/user/delete" method="post" modelAttribute="user">
-                    <form:input type="hidden" path="id" value="${id}"/>
-                    <button type="submit" class="btn btn-danger">YES</button>
-                </form:form>
-                <a href="/admin/user" class="btn btn-success">BACK</a>
             </div>
         </main>
         <jsp:include page="../layout/footer.jsp"/>
