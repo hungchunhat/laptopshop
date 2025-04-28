@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="en">
 
 <head>
@@ -30,11 +31,13 @@
             <div class="container mt-5">
                 <h1>Delete user with id = ${id}</h1>
                 <div class="alert alert-danger">ARE YOU SURE?</div>
-                <form:form action="/admin/user/delete" method="post" modelAttribute="user">
+                <form:form action="/admin/user/delete" method="post" modelAttribute="user" id="form-delete">
                     <form:input type="hidden" path="id" value="${id}"/>
                     <button type="submit" class="btn btn-danger">YES</button>
+                    <a href="/admin/user" class="btn btn-success">BACK</a>
                 </form:form>
-                <a href="/admin/user" class="btn btn-success">BACK</a>
+
+
             </div>
         </main>
         <jsp:include page="../layout/footer.jsp"/>

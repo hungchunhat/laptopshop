@@ -32,6 +32,7 @@
                 </h3>
                 <hr/>
                 <div class="card mx-auto" style="width: 50%;">
+                    <img src="/images/avatar/${user.avatar}">
                     <div class="card-header">
                         ${user.fullName}
                     </div>
