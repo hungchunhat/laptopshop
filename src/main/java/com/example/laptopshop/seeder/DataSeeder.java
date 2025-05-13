@@ -22,6 +22,8 @@ public class DataSeeder implements CommandLineRunner {
             role2.setName("USER");
             role2.setDescription("User bình thường");
             System.out.println("Tạo thành công role: " + roleService.handleSaveRole(role2));
+        }else {
+            System.out.println("Date Seeder Complete");
         }
     }
 }
