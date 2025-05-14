@@ -15,7 +15,7 @@ public class UserController {
     private final UploadService uploadService;
 
     UserController(UserService userService, UploadService uploadService) {
-        this.userService = userService;
+        this.userService = userService; 
         this.uploadService = uploadService;
     }
     @RequestMapping(value = "/admin/user")
