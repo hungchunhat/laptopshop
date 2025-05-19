@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
@@ -25,6 +26,41 @@
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                     <li class="breadcrumb-item active">Product</li>
                 </ol>
+            </div>
+            <div class="container mt-5">
+                <div class="d-flex justify-content-between mb-1">
+                    <h3>User Table</h3>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/product/create"><b>Create Product</b></a>
+                </div>
+                <hr/>
+                <div>
+                    <table class="table table-hover table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id:</th>
+                            <th>Name:</th>
+                            <th>Price:</th>
+                            <th>Factory:</th>
+                            <th>Action:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="product" items="${products}">
+                            <tr>
+                                <td>${product.id}</td>
+                                <td>${product.email}</td>
+                                <td>${product.fullName}</td>
+                                <td>${product.role.name}</td>
+                                <td>
+                                    <a href="/admin/product/${product.id}" class="btn btn-success">View</a>
+                                    <a href="/admin/product/update/${product.id}" class="btn btn-warning">Update</a>
+                                    <a href="/admin/product/delete/${product.id}" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
         <jsp:include page="../layout/footer.jsp"/>

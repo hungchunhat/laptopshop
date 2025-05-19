@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductController {
     @GetMapping("product/{id}")
     public String getProductPage(Model model, @PathVariable long id){
+
         return "client/product/show";
     }
 }

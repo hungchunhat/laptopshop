@@ -1,6 +1,10 @@
 package com.example.laptopshop.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -11,8 +15,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotNull
+    @Email//(regexp)
     private String email;
+    @NotNull
+    @Min(3)
     private String password;
+    @NotNull
     private String fullName;
     private String address;
     private String phone;

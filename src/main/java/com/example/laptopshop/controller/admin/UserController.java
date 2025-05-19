@@ -3,10 +3,14 @@ package com.example.laptopshop.controller.admin;
 import com.example.laptopshop.domain.User;
 import com.example.laptopshop.service.UploadService;
 import com.example.laptopshop.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @Controller
@@ -15,9 +19,10 @@ public class UserController {
     private final UploadService uploadService;
 
     UserController(UserService userService, UploadService uploadService) {
-        this.userService = userService; 
+        this.userService = userService;
         this.uploadService = uploadService;
     }
+
     @RequestMapping(value = "/admin/user")
     public String getAdminPage(Model model) {
         List<User> users = userService.getAllUsers();
@@ -39,9 +44,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String createAdminPage(@ModelAttribute("newUser") User user,
-                                  @RequestParam("file") MultipartFile file) {
-        String avatar = uploadService.handleSaveUpload(file,"avatar");
+    public String createAdminPage(@ModelAttribute("newUser") User user, @RequestParam("file") MultipartFile file, @Valid User newUser, BindingResult bindingResult) {
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        errors.forEach(fieldError -> System.out.println(fieldError.getField() + " " + fieldError.getDefaultMessage()));
+        String avatar = uploadService.handleSaveUpload(file, "avatar");
         String hashPassword = userService.encryptPassword(user.getPassword());
         user.setPassword(hashPassword);
         user.setAvatar(avatar);
