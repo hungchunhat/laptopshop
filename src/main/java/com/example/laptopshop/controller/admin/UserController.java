@@ -44,9 +44,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String createAdminPage(@ModelAttribute("newUser") User user, @RequestParam("file") MultipartFile file, @Valid User newUser, BindingResult bindingResult) {
+    public String createAdminPage(@ModelAttribute("newUser") @Valid User user,
+                                  BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
         List<FieldError> errors = bindingResult.getFieldErrors();
-        errors.forEach(fieldError -> System.out.println(fieldError.getField() + " " + fieldError.getDefaultMessage()));
+        errors.forEach(fieldError -> System.out.println(">>>>>> " + fieldError.getField() + " " + fieldError.getDefaultMessage()));
+        if (bindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
         String avatar = uploadService.handleSaveUpload(file, "avatar");
         String hashPassword = userService.encryptPassword(user.getPassword());
         user.setPassword(hashPassword);

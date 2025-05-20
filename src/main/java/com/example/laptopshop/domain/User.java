@@ -1,10 +1,7 @@
 package com.example.laptopshop.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 
@@ -16,12 +13,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
-    @Email//(regexp)
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    @NotEmpty(message = "Email cannot be empty")
     private String email;
     @NotNull
-    @Min(3)
+    @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
     @NotNull
+    @Size(min = 3, message = "Full name must be at least 3 characters long")
     private String fullName;
     private String address;
     private String phone;
@@ -106,14 +105,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", avatar='" + avatar + '\'' +
-                '}';
+        return "User{" + "id=" + id + ", email='" + email + '\'' + ", password='" + password + '\'' + ", fullName='" + fullName + '\'' + ", address='" + address + '\'' + ", phone='" + phone + '\'' + ", avatar='" + avatar + '\'' + '}';
     }
 }

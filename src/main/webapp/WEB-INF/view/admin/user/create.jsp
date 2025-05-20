@@ -1,5 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 
 <head>
@@ -38,25 +40,52 @@
                                    modelAttribute="newUser">
                             <div class="row">
                                 <div class="mb-3 col-6">
-                                    <form:label for="Email" class="form-label" path="email">Email address</form:label>
-                                    <form:input type="email" class="form-control" id="Email" path="email"
-                                                aria-describedby="emailHelp"/>
+                                    <spring:bind path="newUser.email">
+                                        <form:label for="Email" class="form-label"
+                                                    path="email">Email address</form:label>
+                                        <form:input type="email"
+                                                    cssClass="${ status.error ? 'is-invalid' : '' } form-control"
+                                                    id="Email"
+                                                    path="email"/>
+                                    </spring:bind>
+                                    <form:errors path="email" cssClass="invalid-feedback"/>
                                 </div>
                                 <div class="mb-3 col-6">
+                                    <c:set var="passErr">
+                                        <form:errors path="password" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label for="Password" class="form-label">Password:</label>
-                                    <form:input type="password" class="form-control" path="password" id="Password"/>
+                                    <form:input type="password"
+                                                class="form-control ${not empty passErr?'is-invalid':''}"
+                                                path="password" id="Password"/>
+                                        ${passErr}
                                 </div>
                                 <div class="mb-3 col-6">
+                                    <c:set var="phoneErr">
+                                        <form:errors path="phone" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label for="Phone" class="form-label">Phone Number:</label>
-                                    <form:input type="text" class="form-control" path="phone" id="Phone"/>
+                                    <form:input type="text" class="form-control ${not empty phoneErr?'is-invalid':''}"
+                                                path="phone" id="Phone"/>
+                                        ${phoneErr}
                                 </div>
                                 <div class="mb-3 col-6">
+                                    <c:set var="nameErr">
+                                        <form:errors path="fullName" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label for="Name" class="form-label">Full Name:</label>
-                                    <form:input type="text" class="form-control" path="fullName" id="Name"/>
+                                    <form:input type="text" class="form-control ${not empty nameErr?'is-invalid':''}" path="fullName" id="Name"/>
+                                        ${nameErr}
                                 </div>
                                 <div class="mb-3">
+                                    <c:set var="addressErr">
+                                        <form:errors path="address" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label for="Address" class="form-label">Address:</label>
-                                    <form:input type="text" class="form-control" path="address" id="Address"/>
+                                    <form:input type="text"
+                                                class="form-control ${not empty addressErr? 'is-invalid':''}"
+                                                path="address" id="Address"/>
+                                        ${addressErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="role" class="form-label">Role:</label>
@@ -64,6 +93,7 @@
                                         <form:option value="ADMIN">ADMIN</form:option>
                                         <form:option value="USER">USER</form:option>
                                     </form:select>
+                                    <form:errors path="role" cssClass="invalid-feedback"/>
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="avatarFile" class="form-label">Avatar:</label>
