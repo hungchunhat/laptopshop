@@ -6,6 +6,8 @@ import com.example.laptopshop.repository.RoleRepository;
 import com.example.laptopshop.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import java.util.List;
 
@@ -47,6 +49,39 @@ public class UserService {
     }
     public Role getRoleByName(String name) {
         return this.roleService.getRoleByName(name);
+    }
+    public User handleCreateUser(User user, String avatar){
+        String hashPassword = encryptPassword(user.getPassword());
+        user.setPassword(hashPassword);
+        user.setAvatar(avatar);
+        user.setRole(getRoleByName(user.getRole().getName()));
+        return handleSaveUser(user);
+    }
+    public User handleUpdateUser(User user, String fileName){
+        User user1 = this.getUserById(user.getId());
+        if (user1 != null) {
+            if(fileName != null && !fileName.isEmpty()){
+                user1.setAvatar(fileName);
+            }
+            user1.setAddress(user.getAddress());
+            user1.setPhone(user.getPhone());
+            user1.setFullName(user.getFullName());
+            user1.setRole(getRoleByName(user.getRole().getName()));
+            handleSaveUser(user1);
+        }
+        return user1;
+    }
+    public boolean hasErrors(BindingResult bindingResult){
+        List<FieldError> errors = bindingResult.getFieldErrors()
+                .stream()
+                .filter(fieldError -> !(fieldError.getField().equals("email") || fieldError.getField().equals(
+                        "password")))
+                .toList();
+        if (!errors.isEmpty()) {
+           errors.forEach(fieldError -> System.out.println(">>>>>> " + fieldError.getField() + " " + fieldError.getDefaultMessage()));
+           return true;
+        }
+        return false;
     }
 
 }

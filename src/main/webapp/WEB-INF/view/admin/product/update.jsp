@@ -22,66 +22,75 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Manager User</h1>
+                <h1 class="mt-4">Manager Product</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active">User</li>
+                    <li class="breadcrumb-item active">Product</li>
                 </ol>
             </div>
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-lg-6 col-sm-12 mx-auto">
-                        <h1 class="my-3">Create User</h1>
+                        <h1 class="my-3">Update Product</h1>
                         <hr/>
-                        <form:form method="post" action="/admin/product/create" enctype="multipart/form-data"
-                                   modelAttribute="newProduct">
+                        <form:form method="post" action="/admin/product/update" enctype="multipart/form-data"
+                                   modelAttribute="product">
                             <div class="row">
+                                <form:input type="hidden" class="form-control" path="id"/>
                                 <div class="mb-3 col-6">
                                     <c:set var="nameErr">
                                         <form:errors path="name" cssClass="invalid-feedback"/>
                                     </c:set>
                                     <form:label for="name" class="form-label" path="name">Name:</form:label>
-                                    <form:input type="text" class="form-control ${not empty nameErr?'is-invalid':''}" id="name" path="name"/>
-                                    ${nameErr}
+                                    <form:input type="text" class="form-control ${not empty nameErr?'is-invalid':''}"
+                                                id="name" path="name"/>
+                                        ${nameErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <c:set var="priceErr">
                                         <form:errors path="price" cssClass="invalid-feedback"/>
                                     </c:set>
                                     <label for="price" class="form-label">Price:</label>
-                                    <form:input type="text" class="form-control ${not empty priceErr?'is-invalid':''}" path="price" id="price"/>
-                                    ${priceErr}
+                                    <form:input type="text" class="form-control ${not empty priceErr?'is-invalid':''}"
+                                                path="price" id="price"/>
+                                        ${priceErr}
                                 </div>
                                 <div class="mb-3 col-12">
                                     <c:set var="detailDescErr">
                                         <form:errors path="detailDesc" cssClass="invalid-feedback"/>
                                     </c:set>
                                     <label for="Detail" class="form-label">Detail Description:</label>
-                                    <form:textarea  class="form-control ${not empty detailDescErr?'is-invalid':''}" path="detailDesc" id="Detail"/>
-                                    ${detailDescErr}
+                                    <form:textarea class="form-control ${not empty detailDescErr?'is-invalid':''}"
+                                                   path="detailDesc" id="Detail"/>
+                                        ${detailDescErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <c:set var="shortDescErr">
                                         <form:errors path="shortDesc" cssClass="invalid-feedback"/>
                                     </c:set>
                                     <label for="shortDesc" class="form-label">Short Description</label>
-                                    <form:input type="text" class="form-control ${not empty shortDescErr?'is-invalid':''}" path="shortDesc" id="shortDesc"/>
-                                    ${shortDescErr}
+                                    <form:input type="text"
+                                                class="form-control ${not empty shortDescErr?'is-invalid':''}"
+                                                path="shortDesc" id="shortDesc"/>
+                                        ${shortDescErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <c:set var="quantityErr">
                                         <form:errors path="quantity" cssClass="invalid-feedback"/>
                                     </c:set>
                                     <label for="quantity" class="form-label">Quantity:</label>
-                                    <form:input type="text" class="form-control ${not empty quantityErr?'is-invalid':''}" path="quantity" id="quantity"/>
-                                    ${quantityErr}
+                                    <form:input type="text"
+                                                class="form-control ${not empty quantityErr?'is-invalid':''}"
+                                                path="quantity" id="quantity"/>
+                                        ${quantityErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <c:set var="factoryErr">
                                         <form:errors path="factory" cssClass="invalid-feedback"/>
                                     </c:set>
                                     <label for="factory" class="form-label">Factory:</label>
-                                    <form:select class="form-select ${not empty factoryErr?'is-invalid':''}" id="factory" path="factory">
+                                    <form:select class="form-select ${not empty factoryErr?'is-invalid':''}"
+                                                 id="factory" path="factory">
                                         <form:option value="APPLE">Apple</form:option>
                                         <form:option value="ASUS">Asus</form:option>
                                         <form:option value="LENOVO">Lenovo</form:option>
@@ -89,21 +98,22 @@
                                         <form:option value="LG">LG</form:option>
                                         <form:option value="ACER">Acer</form:option>
                                     </form:select>
-                                    ${factoryErr}
+                                        ${factoryErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <c:set var="targetErr">
                                         <form:errors path="target" cssClass="invalid-feedback"/>
                                     </c:set>
                                     <label for="target" class="form-label">Target:</label>
-                                    <form:select class="form-select ${not empty targetErr?'is-invalid':''}" id="target" path="target">
+                                    <form:select class="form-select ${not empty targetErr?'is-invalid':''}" id="target"
+                                                 path="target">
                                         <form:option value="GAMING">Gaming</form:option>
                                         <form:option value="SINHVIEN-VANPHONG">Sinh viên - văn phòng</form:option>
                                         <form:option value="THIET-KE-DO-HOA">Thiết kế đồ họa</form:option>
                                         <form:option value="MONG-NHE">Mỏng nhẹ</form:option>
                                         <form:option value="DOANH-NHAN">Doanh nhân</form:option>
                                     </form:select>
-                                    ${targetErr}
+                                        ${targetErr}
                                 </div>
                                 <div class="mb-3 col-12">
                                     <label for="avatarFile" class="form-label">Image:</label>
@@ -130,6 +140,10 @@
 <script>
     $(document).ready(() => {
         const avatarFile = $("#avatarFile");
+        const orgImg = "${product.image}";
+        if(orgImg){
+            $("#avatarPreview").attr("src", '/images/product/' + orgImg).css({"display": "block"});
+        }
         avatarFile.change(function (e) {
             const imgURL = URL.createObjectURL(e.target.files[0]);
             $("#avatarPreview").attr("src", imgURL).css({"display": "block"});

@@ -1,6 +1,7 @@
 package com.example.laptopshop.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "products")
@@ -8,11 +9,16 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Size(min = 3, message = "Name must be at least 3 characters long")
     private String name;
+    @DecimalMin(value = "0.0",inclusive = false, message = "Price must greater than zero")
     private double price;
     private String image;
+    @NotEmpty(message = "Detail description cannot be empty")
     private String detailDesc;
+    @NotEmpty(message = "Short description cannot be empty")
     private String shortDesc;
+    @Min(value = 1, message = "Quantity must be greater than zero")
     private long quantity;
     private long sold;
     private String factory;

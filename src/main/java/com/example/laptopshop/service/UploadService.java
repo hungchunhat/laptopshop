@@ -13,7 +13,7 @@ import java.io.IOException;
 public class UploadService {
     private final ServletContext servletContext;
 
-    UploadService(ServletContext servletContext) {
+    public UploadService(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 

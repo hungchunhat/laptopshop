@@ -52,11 +52,7 @@ public class UserController {
             return "admin/user/create";
         }
         String avatar = uploadService.handleSaveUpload(file, "avatar");
-        String hashPassword = userService.encryptPassword(user.getPassword());
-        user.setPassword(hashPassword);
-        user.setAvatar(avatar);
-        user.setRole(userService.getRoleByName(user.getRole().getName()));
-        userService.handleSaveUser(user);
+        userService.handleCreateUser(user, avatar);
         return "redirect:/admin/user";
     }
 
@@ -68,16 +64,18 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String updateUser(@ModelAttribute("user") User user) {
-        User user1 = this.userService.getUserById(user.getId());
-        if (user1 != null) {
-            user1.setAddress(user.getAddress());
-            user1.setPhone(user.getPhone());
-            user1.setFullName(user.getFullName());
-            user1.setRole(userService.getRoleByName(user.getRole().getName()));
-            userService.handleSaveUser(user1);
+    public String updateUser(Model model, @ModelAttribute("user") @Valid User user,
+                             BindingResult bindingResult, @RequestParam MultipartFile file) {
+        boolean errors = userService.hasErrors(bindingResult);
+        if (errors) {
+            model.addAttribute("user",user);
+            return "admin/user/update";
         }
-        System.out.println(user1);
+        String fileName = null;
+        if (file != null && !file.isEmpty()) {
+            fileName = uploadService.handleSaveUpload(file, "avatar");
+        }
+        userService.handleUpdateUser(user, fileName);
         return "redirect:/admin/user";
     }
 

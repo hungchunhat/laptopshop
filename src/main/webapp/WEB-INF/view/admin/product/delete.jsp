@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html lang="en">
 
 <head>
@@ -21,45 +22,22 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Product</h1>
+                <h1 class="mt-4">Manager User</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Product</li>
+                    <li class="breadcrumb-item active">User</li>
                 </ol>
             </div>
             <div class="container mt-5">
-                <div class="d-flex justify-content-between mb-1">
-                    <h3>User Table</h3>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/product/create"><b>Create Product</b></a>
-                </div>
-                <hr/>
-                <div>
-                    <table class="table table-hover table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>Id:</th>
-                            <th>Name:</th>
-                            <th>Price:</th>
-                            <th>Factory:</th>
-                            <th>Action:</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="product" items="${products}">
-                            <tr>
-                                <td>${product.id}</td>
-                                <td>${product.name}</td>
-                                <td>${product.price}</td>
-                                <td>${product.factory}</td>
-                                <td>
-                                    <a href="/admin/product/update/${product.id}" class="btn btn-warning">Update</a>
-                                    <a href="/admin/product/delete/${product.id}" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
+                <h1>Delete product with id = ${id}</h1>
+                <div class="alert alert-danger">ARE YOU SURE?</div>
+                <form:form action="/admin/product/delete" method="post" modelAttribute="product" id="form-delete">
+                    <form:input type="hidden" path="id" value="${id}"/>
+                    <button type="submit" class="btn btn-danger">YES</button>
+                    <a href="/admin/product" class="btn btn-success">BACK</a>
+                </form:form>
+
+
             </div>
         </main>
         <jsp:include page="../layout/footer.jsp"/>

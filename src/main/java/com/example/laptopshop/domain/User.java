@@ -12,7 +12,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotNull
+
     @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     @NotEmpty(message = "Email cannot be empty")
     private String email;
@@ -23,6 +23,7 @@ public class User {
     @Size(min = 3, message = "Full name must be at least 3 characters long")
     private String fullName;
     private String address;
+    @NotEmpty(message = "Phone number cannot be empty")
     private String phone;
     private String avatar;
     @ManyToOne(fetch = FetchType.LAZY)

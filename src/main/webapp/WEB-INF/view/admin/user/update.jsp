@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 
 <head>
@@ -32,36 +33,55 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-12 mx-auto">
                         <h2 class="border-bottom my-3">Update User ${user.id}</h2>
-                        <form:form method="post" action="/admin/user/update" modelAttribute="user">
+                        <form:form method="post" action="/admin/user/update" modelAttribute="user"
+                                   enctype="multipart/form-data">
                             <div class="row">
+                                <c:set var="phoneErr">
+                                    <form:errors path="phone" cssClass="invalid-feedback"/>
+                                </c:set>
+                                <c:set var="nameErr">
+                                    <form:errors path="fullName" cssClass="invalid-feedback"/>
+                                </c:set>
+                                <c:set var="addressErr">
+                                    <form:errors path="address" cssClass="invalid-feedback"/>
+                                </c:set>
+                                <c:set var="roleErr">
+                                    <form:errors path="role" cssClass="invalid-feedback"/>
+                                </c:set>
                                 <div class="mb-3">
                                     <form:input type="hidden" class="form-control" path="id" id="id"
                                                 value="${user.id}"/>
                                 </div>
                                 <div class="mb-3 col-12">
                                     <form:label for="Email" class="form-label" path="email">Email address</form:label>
-                                    <form:input type="email" class="form-control" id="Email" path="email"
-                                                aria-describedby="emailHelp" value="${user.email}" disabled="true"/>
-                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone
-                                        else.
-                                    </div>
+                                    <form:input type="email" cssClass="form-control text-secondary fst-italic"
+                                                id="Email" path="email"
+                                                aria-describedby="emailHelp" value="${user.email}"
+                                                readonly="true"/>
+
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="Phone" class="form-label">Phone Number:</label>
-                                    <form:input type="text" class="form-control" path="phone" id="Phone"
+                                    <form:input type="text" cssClass="form-control ${not empty phoneErr? 'is-invalid':''}"
+                                                path="phone" id="Phone"
                                                 value="${user.phone}"/>
+                                        ${phoneErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="Name" class="form-label">Full Name:</label>
-                                    <form:input type="text" class="form-control" path="fullName" id="Name"
+                                    <form:input type="text" class="form-control ${not empty nameErr? 'is-invalid':''}"
+                                                path="fullName" id="Name"
                                                 value="${user.fullName}"/>
+                                        ${nameErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="role" class="form-label">Role:</label>
-                                    <form:select class="form-select" id="role" path="role.name">
+                                    <form:select class="form-select ${not empty roleErr? 'is-invalid':''}" id="role"
+                                                 path="role.name">
                                         <form:option value="ADMIN">ADMIN</form:option>
                                         <form:option value="USER">USER</form:option>
                                     </form:select>
+                                        ${roleErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="avatarFile" class="form-label">Avatar:</label>
@@ -74,8 +94,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="Address" class="form-label">Address:</label>
-                                    <form:input type="text" class="form-control" path="address" id="Address"
+                                    <form:input type="text"
+                                                class="form-control ${not empty addressErr? 'is-invalid':''}"
+                                                path="address" id="Address"
                                                 value="${user.address}"/>
+                                        ${addressErr}
                                 </div>
                                 <div class="mb-3 col-6">
                                     <button type="submit" class="btn btn-warning">Update</button>
