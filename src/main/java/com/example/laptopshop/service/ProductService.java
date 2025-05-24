@@ -8,6 +8,7 @@ import org.springframework.validation.FieldError;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -25,7 +26,7 @@ public class ProductService {
         product.setImage(fileName);
         return handleSaveProduct(product);
     }
-    public Product getProductById(long id){
+    public Optional<Product> getProductById(long id){
         return productRepository.findById(id);
     }
     public boolean hasError(BindingResult bindingResult){
@@ -36,7 +37,7 @@ public class ProductService {
         return false;
     }
     public void handleUpdateProduct(Product product, String fileName){
-        Product product1 = this.getProductById(product.getId());
+        Product product1 = this.getProductById(product.getId()).get();
         if(product1 != null){
             if(fileName != null && !fileName.isEmpty()){
                 product1.setImage(fileName);
@@ -53,9 +54,10 @@ public class ProductService {
         handleSaveProduct(product1);
     }
     public void handleDeleteProductById(long id){
-        Product product = this.getProductById(id);
-        if(product != null){
-            productRepository.delete(product);
-        }
+        Product product = this.getProductById(id).get();
+        productRepository.delete(product);
+    }
+    public long getProductCount() {
+        return productRepository.count();
     }
 }

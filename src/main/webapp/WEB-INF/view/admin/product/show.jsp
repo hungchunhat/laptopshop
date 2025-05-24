@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
@@ -21,45 +20,30 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Product</h1>
+                <h1 class="mt-4">Manager Product</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                     <li class="breadcrumb-item active">Product</li>
                 </ol>
             </div>
-            <div class="container mt-5">
-                <div class="d-flex justify-content-between mb-1">
-                    <h3>User Table</h3>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/product/create"><b>Create Product</b></a>
-                </div>
+            <div class="mt-5">
+                <h3 class="text-center">
+                    Product's details
+                </h3>
                 <hr/>
-                <div>
-                    <table class="table table-hover table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>Id:</th>
-                            <th>Name:</th>
-                            <th>Price:</th>
-                            <th>Factory:</th>
-                            <th>Action:</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="product" items="${products}">
-                            <tr>
-                                <td>${product.id}</td>
-                                <td>${product.name}</td>
-                                <td>${product.price}</td>
-                                <td>${product.factory}</td>
-                                <td>
-                                    <a href="/admin/product/${product.id}" class="btn btn-success">View</a>
-                                    <a href="/admin/product/update/${product.id}" class="btn btn-warning">Update</a>
-                                    <a href="/admin/product/delete/${product.id}" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                <div class="card mx-auto" style="width: 50%;">
+                    <img src="/images/product/${product.image}">
+                    <div class="card-header">
+                        ${product.name}
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Price: ${product.price}</li>
+                        <li class="list-group-item">Factory: ${product.factory}</li>
+                        <li class="list-group-item">Target ${product.target}</li>
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-center mt-2">
+                    <a href="/admin/product" class="btn btn-success text-center">Back</a>
                 </div>
             </div>
         </main>

@@ -14,6 +14,7 @@ public class Product {
     @DecimalMin(value = "0.0",inclusive = false, message = "Price must greater than zero")
     private double price;
     private String image;
+    @Column(columnDefinition = "TEXT")
     @NotEmpty(message = "Detail description cannot be empty")
     private String detailDesc;
     @NotEmpty(message = "Short description cannot be empty")
@@ -23,6 +24,20 @@ public class Product {
     private long sold;
     private String factory;
     private String target;
+
+    public Product(){}
+    public Product(int id, String name, double price, String image, String detailDesc, String shortDesc, long quantity, long sold, String factory, String target) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.detailDesc = detailDesc;
+        this.shortDesc = shortDesc;
+        this.quantity = quantity;
+        this.sold = sold;
+        this.factory = factory;
+        this.target = target;
+    }
 
     public int getId() {
         return id;

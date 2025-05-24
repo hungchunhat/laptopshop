@@ -49,7 +49,7 @@ public class ProductController {
     }
     @GetMapping("/product/update/{id}")
     public String editProduct(@PathVariable long id, Model model){
-        Product product = productService.getProductById(id);
+        Product product = productService.getProductById(id).get();
         model.addAttribute("product", product);
         return "admin/product/update";
     }
@@ -79,5 +79,11 @@ public class ProductController {
     public String deleteProduct(@ModelAttribute Product product){
         productService.handleDeleteProductById(product.getId());
         return "redirect:/admin/product";
+    }
+    @GetMapping("/product/{id}")
+    public String showProduct(Model model, @PathVariable long id){
+        Product product = productService.getProductById(id).get();
+        model.addAttribute("product", product);
+        return "admin/product/show";
     }
 }
