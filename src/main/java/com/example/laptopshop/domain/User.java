@@ -23,7 +23,6 @@ public class User {
     @Size(min = 3, message = "Full name must be at least 3 characters long")
     private String fullName;
     private String address;
-    @NotEmpty(message = "Phone number cannot be empty")
     private String phone;
     private String avatar;
     @ManyToOne(fetch = FetchType.LAZY)

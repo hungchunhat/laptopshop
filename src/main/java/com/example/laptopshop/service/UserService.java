@@ -2,6 +2,7 @@ package com.example.laptopshop.service;
 
 import com.example.laptopshop.domain.Role;
 import com.example.laptopshop.domain.User;
+import com.example.laptopshop.domain.dto.RegisterDTO;
 import com.example.laptopshop.repository.RoleRepository;
 import com.example.laptopshop.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -54,7 +55,11 @@ public class UserService {
         String hashPassword = encryptPassword(user.getPassword());
         user.setPassword(hashPassword);
         user.setAvatar(avatar);
-        user.setRole(getRoleByName(user.getRole().getName()));
+        if(user.getRole() == null){
+            user.setRole(getRoleByName("USER"));
+        }else{
+            user.setRole(getRoleByName(user.getRole().getName()));
+        }
         return handleSaveUser(user);
     }
     public User handleUpdateUser(User user, String fileName){
@@ -82,6 +87,13 @@ public class UserService {
            return true;
         }
         return false;
+    }
+    public User registerDTOtoUser(RegisterDTO registerDTO){
+        User user = new User();
+        user.setFullName(registerDTO.getFirstName()+ " "+ registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
     }
 
 }
